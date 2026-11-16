@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Princess 🎂</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #e6ccff, #ffe6f0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255,255,255,0.8);
+    padding: 35px 25px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(180,100,160,0.2);
+    border: 2px solid white;
+    position: relative;
+    z-index: 2;
+}
+
+.cake {
+    font-size: 85px;
+    animation: bounce 2s infinite;
+}
+
+h1 {
+    color: #e75480;
+    font-size: clamp(30px, 8vw, 42px);
+    margin: 15px 0;
+}
+
+.subtitle {
+    color: #9b59b6;
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.message {
+    color: #70405f;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 20px 0;
+}
+
+.highlight {
+    color: #e75480;
+    font-weight: bold;
+}
+
+button {
+    border: none;
+    padding: 15px 28px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #ff69a6, #bd72e8);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(220,80,150,0.3);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.06);
+}
+
+#surprise {
+    display: none;
+    margin-top: 25px;
+    animation: appear 1s ease;
+}
+
+.footer {
+    color: #c05a91;
+    font-size: 13px;
+    margin-top: 25px;
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 22px;
+    animation: float 7s linear infinite;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+@keyframes float {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 400px) {
+    .card { padding: 25px 18px; }
+    .cake { font-size: 70px; }
+    .message { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="cake">🎂</div>
+
+    <h1>Happy Birthday!</h1>
+
+    <p class="subtitle">
+        To the sweetest person ever 💗
+    </p>
+
+    <div class="message">
+        Today is all about you! 🌸<br>
+        May your life always be filled with
+        <span class="highlight">love, happiness and endless smiles.</span>
+        <br><br>
+        You deserve all the beautiful things
+        this world has to offer. ✨
+    </div>
+
+    <button onclick="celebrate()">
+        🎁 Open Your Surprise
+    </button>
+
+    <div id="surprise">
+        <h2 style="color:#e75480; margin-bottom:15px;">
+            Happy Birthday, Princess! 👑
+        </h2>
+
+        <p class="message">
+            Dear Pookie Ji, 💕<br><br>
+
+            You are truly one of the sweetest people.
+            May every dream of yours come true.
+            May God bless you with countless reasons
+            to smile and a lifetime of happiness.
+
+            <br><br>
+            Keep shining, keep smiling and
+            always stay the beautiful person you are.
+
+            <br><br>
+            Lots of love! 💗🎀
+        </p>
+
+        <div style="font-size:35px;">
+            🧸 🌷 💖 🎀
+        </div>
+    </div>
+
+    <div class="footer">
+        Made with lots of love 💗
+    </div>
+
+</div>
+
+<script>
+function celebrate() {
+
+    document.getElementById("surprise").style.display = "block";
+
+    const duration = 5000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 5,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
+
+    confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+    });
+}
+
+// Floating hearts
+const emojis = ["💗", "💕", "💖", "🌸", "✨"];
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = emojis[
+        Math.floor(Math.random() * emojis.length)
+    ];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 10000);
+}, 600);
+</script>
+
+</body>
+</html>
